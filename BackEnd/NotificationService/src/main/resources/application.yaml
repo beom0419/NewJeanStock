@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: NotificationBackend
+  config:
+    import: optional:file:.env[.properties]
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+
+  mail:
+    host: ${EMAIL_HOST}
+    port: ${EMAIL_PORT}
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    protocol: ${EMAIL_PROTOCOL}
+    properties:
+      mail:
+        debug: ${EMAIL_DEBUG}
+        smtp:
+          auth: ${EMAIL_SMTPAUTH}
+          timeout: ${EMAIL_TIMEOUT}
+          starttls:
+            enable: ${EMAIL_STARTTLS}
+firebase:
+  admin-json-path: ${FIREBASE_ADMIN_JSON_PATH}
+
+kafka:
+  backoff:
+    interval: 99000
+    max_failure: 5
+  email-consumer:
+    bootstrap-servers: ${KAFKA_SERVER[0]}, ${KAFKA_SERVER[1]}, ${KAFKA_SERVER[2]}
+    default-topic: ${KAFKA_CONSUMER_TOPIC_EMAIL}
+    group-id: ${KAFKA_CONSUMER_GROUP_EMAIL}
+    auto-offset-reset: ${KAFKA_CONSUMER_AUTO_OFFSET_RESET}
+    key-deserializer: ${KAFKA_KEY_DESERIALIZER}
+    value-deserializer: ${KAFKA_VALUE_DESERIALIZER}
+
+  fcm-consumer:
+    bootstrap-servers: ${KAFKA_SERVER[0]}, ${KAFKA_SERVER[1]}, ${KAFKA_SERVER[2]}
+    default-topic: ${KAFKA_CONSUMER_TOPIC_FCM}
+    group-id: ${KAFKA_CONSUMER_GROUP_FCM}
+    auto-offset-reset: ${KAFKA_CONSUMER_AUTO_OFFSET_RESET}
+    key-deserializer: ${KAFKA_KEY_DESERIALIZER}
+    value-deserializer: ${KAFKA_VALUE_DESERIALIZER}
+
+  producer:
+    bootstrap-servers: ${KAFKA_SERVER[0]}, ${KAFKA_SERVER[1]}, ${KAFKA_SERVER[2]}
+    key-serializer: ${KAFKA_KEY_SERIALIZER}
+    value-serializer: ${KAFKA_VALUE_SERIALIZER}

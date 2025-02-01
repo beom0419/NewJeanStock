@@ -1,0 +1,63 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  profiles.include: oauth
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+#  jackson:
+#    property-naming-strategy: SNAKE_CASE
+#  sql:
+#    init:
+#      mode: always
+#      show_sql: true
+
+websocket:
+  url: ${SOCKET_URL}
+
+redis:
+  host: ${REDIS_DEV_HOST}
+  port: ${REDIS_DEV_PORT}
+  nodes: ${REDIS_DEV_NODES[0]}, ${REDIS_DEV_NODES[1]}, ${REDIS_DEV_NODES[2]}, ${REDIS_DEV_NODES[3]}, ${REDIS_DEV_NODES[4]}, ${REDIS_DEV_NODES[5]}
+
+jwt:
+  bearer-type: ${BEARER_TYPE}
+  secret: ${TOKEN_SECRET}
+  access-token:
+    expire-duration: ${ACCESS_TOKEN_EXPIRE_DURATION}
+    cookie-name: ${ACCESS_TOKEN_NAME}
+  refresh-token:
+    expire-duration: ${REFRESH_TOKEN_EXPIRE_DURATION}
+    cookie-name: ${REFRESH_TOKEN_NAME}
+  cookie-path: ${COOKIE_PATH}
+
+image:
+  url: ${IMG_URL}
+  directories: ${IMG_UPLOAD_DIRECTORIES}
+  default-img-name: ${DEFAULT_IMG_NAME}
+
+chicken-stock:
+  domain: ${CHICKENSTOCK_DOMAIN}
+  admin-key: ${CHICKENSTOCK_KEY}
+
+kis:
+  app-key: ${KIS_APPKEY}
+  app-secret: ${KIS_APPSECRET}
+
+kafka:
+  producer:
+    bootstrap-servers: ${KAFKA_SERVER[0]}, ${KAFKA_SERVER[1]}, ${KAFKA_SERVER[2]}
+    key-serializer: ${KAFKA_KEY_SERIALIZER}
+    value-serializer: ${KAFKA_VALUE_SERIALIZER}
+    topic:
+      email: ${KAFKA_EMAIL_TOPIC}
+      fcm: ${KAFKA_FCM_TOPIC}
