@@ -68,6 +68,10 @@
 
 **Architecture**
 
+<img width="1143" alt="chickenStock_erd" src="https://github.com/user-attachments/assets/dcaf8945-cd2a-4746-af52-bba5d0f5be42" />
+
+**Architecture**
+
 ![image-2.png](./image-2.png)
 
 **UX/UI**
